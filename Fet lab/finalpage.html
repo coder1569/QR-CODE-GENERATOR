@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-js-package@1.0.4/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("img.jpeg");
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -100;
+        }
+
+        a {
+            cursor: pointer;
+       
+        }
+    </style>
+    <title>QR Code Generator</title>
+</head>
+
+<body>
+    <video autoplay muted loop>
+        <source src="backgroundanimation.mp4" type="video/mp4">
+    </video>
+    <form id="myForm">
+        <center>
+            <h2>QR GENERATOR</h2>
+        </center>
+        <label for="URL">Enter URL to generate your QR Code</label>
+        <input type="text" id="URL" name="URL" placeholder="e.g. www.example.com" required>
+        <button type="button" onclick="generateQR()">Generate</button>
+        <div id="qrcode"></div>
+    </form>
+    <script>
+        function isValidURL(url) {
+            var urlPattern = /^(https?:\/\/)?([\w.-]+)\.([a-z]{2,})(\/\S*)?$/i;
+            return urlPattern.test(url);
+        }
+
+        function generateQR() {
+            var url = document.getElementById('URL').value;
+
+            if (url === '') {
+                alert('Please fill in the URL field');
+            } else if (!isValidURL(url)) {
+                alert('Please enter a valid URL');
+            } else {
+                document.getElementById('qrcode').innerHTML = '';
+
+                var qrcode = new QRCode(document.getElementById('qrcode'), {
+                    text: url,
+                    width: 128,
+                    height: 128,
+                });
+
+                       var link = document.createElement('a');
+                link.href = url;
+        
+                       link.appendChild(document.getElementById('qrcode').firstChild);
+
+       
+                document.getElementById('qrcode').appendChild(link);
+
+                alert('QR Code generated for: ' + url);
+            }
+        }
+    </script>
+</body>
+
+</html>

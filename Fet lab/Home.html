@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    body {
+      padding-top: 56px;
+    }
+
+    .navbar {
+      background-color: #343a40;
+    }
+
+    .navbar-dark .navbar-toggler-icon {
+      background-color: #fff;
+    }
+
+    .navbar-nav .nav-item {
+      margin-right: 10px;
+    }
+
+    .login-form {
+      max-width: 300px;
+      margin: auto;
+      margin-top: 50px;
+    }
+
+    video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -100;
+    }
+  </style>
+  <title>QR code generator</title>
+</head>
+
+<body>
+  <video autoplay muted loop>
+    <source src="backgroundanimation.mp4" type="video/mp4">
+  </video>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <a class="navbar-brand" href="#">QR CODE GENERATOR</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="login-register-main/login.php">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="login-register-main/registration.php">Sign up</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="login-form">
+    <form><br><br><br><br><br><br>
+      <center><button type="submit" class="btn btn-primary" onclick="submitForm(event)">Generate QR Code</button></center>
+    </form>
+  </div>
+  <script>
+    function submitForm(event) {
+      event.preventDefault(); 
+
+      var loginPageUrl = 'login-register-main/registration.php';
+      alert("Please Login to continue your process");
+
+      
+      setTimeout(function () {
+        window.location.href = loginPageUrl;
+      }, 1000); 
+    }
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

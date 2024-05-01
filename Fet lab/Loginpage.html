@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="v     iewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .login-container {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: rgb(255, 255, 255);
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+        }
+
+        input {
+            padding: 8px;
+            margin-bottom: 16px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-top: 5px;
+        }
+
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -100;
+        }
+    </style>
+</head>
+
+<body>
+    <video autoplay muted loop>
+        <source src="backgroundanimation.mp4" type="video/mp4">
+    </video>
+    <div class="login-container">
+        <form onsubmit="validateForm(event)">
+            <h2>Login</h2>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="eg: sidsriram" required>
+            <div id="username-error" class="error-message"></div>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <div id="password-error" class="error-message"></div>
+
+            <button type="submit">Login</button>
+            New user?
+            <button type="button" onclick="redirectToSignUp()">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm(event) {
+            event.preventDefault();
+
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            resetErrorMessages();
+
+            var isValid = true;
+
+            if (username === '') {
+                displayErrorMessage('Username is required.', 'username-error');
+                isValid = false;
+            } else if (username.length < 4) {
+                displayErrorMessage('Username must be at least 4 characters.', 'username-error');
+                isValid = false;
+            }
+
+            if (password === '') {
+                displayErrorMessage('Password is required.', 'password-error');
+                isValid = false;
+            } else if (password.length < 6) {
+                displayErrorMessage('Password must be at least 6 characters.', 'password-error');
+                isValid = false;
+            } else if (!isStrongPassword(password)) {
+                displayErrorMessage('Password must include at least one uppercase letter, one lowercase letter, and one digit.', 'password-error');
+                isValid = false;
+            }
+
+            if (isValid) {
+                window.location.href = 'success.html';
+            }
+        }
+
+        function displayErrorMessage(message, elementId) {
+            var errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+        }
+
+        function resetErrorMessages() {
+            var errorElements = document.querySelectorAll('.error-message');
+            errorElements.forEach(function (element) {
+                element.textContent = '';
+            });
+        }
+
+        function isStrongPassword(password) {
+            return /[A-Z]/.test(password) && /[a-z]/.test(password) && /\d/.test(password);
+        }
+
+        function redirectToSignUp() {
+            window.location.href = 'signup.html';
+        }
+    </script>
+
+</body>
+
+</html>
